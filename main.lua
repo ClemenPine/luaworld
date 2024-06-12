@@ -310,7 +310,9 @@ local function parse_input(tokens)
             "  corpus\n" ..
             "    list\n"..
             "    set\n"..
+            "    add\n" ..
             "    pairs\n" ..
+            "    match\n" ..
             "  cache clear\n" ..
             "  config\n" ..
             "  help\n" ..
