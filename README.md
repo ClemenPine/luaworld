@@ -1,4 +1,5 @@
 # LuaWorld
+It's yet another analyzer but with no features and written in lua
 
 ## Installation
 Note that this analyzer has not been tested on windows. It may work, it may not.
