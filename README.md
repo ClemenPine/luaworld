@@ -1,11 +1,10 @@
 # LuaWorld
 
-LuaWorld is a keyboard layout analyzer I've been working on, written in Lua
-
 ## Installation
+Note that this analyzer has not been tested on windows. It may work, it may not.
 
 ### Compiler
-LuaWorld uses Lua 5.1. I recommend using the [JIT compiler](http://luajit.org/install.html) for Lua, but you can also use the official [lua compiler](https://lua.org/download.html).
+LuaWorld uses Lua 5.1. I'd recommend using the [JIT compiler](http://luajit.org/install.html) for Lua, but you can also use the official [lua compiler](https://lua.org/download.html).
 
 ### Luarocks
 You'll need to install the following packages using [luarocks](https://github.com/luarocks/luarocks):
