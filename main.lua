@@ -2,6 +2,7 @@ require "src/corpus"
 
 local serpent = require "lib/serpent"
 local config = require "config"
+local shell_last
 
 local function save_config(filename)
     local data = "return " .. serpent.block(config, {comment=false})
@@ -299,9 +300,10 @@ local function parse_corpus(tokens)
 end
 
 local function parse_input(tokens)
-    local func
+    if tokens[1] == "!!" then
+        
 
-    if tokens[1] == "clear" then
+    elseif tokens[1] == "clear" then
         clear_screen()
 
     elseif tokens[1] == "help" then
@@ -320,7 +322,7 @@ local function parse_input(tokens)
         )
 
     elseif tokens[1] == "corpus" then
-        func = parse_corpus(tokens)
+        parse_corpus(tokens)
 
     elseif tokens[1] == "config" then
         if tokens[2] then
@@ -375,11 +377,35 @@ local function parse_input(tokens)
     elseif #tokens ~= 0 then
         print("Unrecognized command '" .. tokens[1] .. "'.")
     end
-
-    return func
 end
 
-local func
+local function parse_command(input)
+    local commands = {}
+    for match in (input .. " && "):gmatch("(.-) && ") do
+        table.insert(commands, match)
+    end
+
+    local processed = {}
+    for _, command in ipairs(commands) do
+        local tokens = {}
+        for item in command:gmatch("([^ ]+)") do
+            table.insert(tokens, item)
+        end
+
+        if tokens[1] then
+            if tokens[1] == "!!" and shell_last then
+                table.insert(processed, parse_command(shell_last))
+            else
+                print()
+                parse_input(tokens)
+                table.insert(processed, command)
+            end
+        end
+    end
+
+    return table.concat(processed, " && ")
+end
+
 while true do
     io.write("> ")
     local input = io.read()
@@ -403,21 +429,9 @@ while true do
         end
     end
 
-    local commands = {}
-    for match in (input .. " && "):gmatch("(.-) && ") do
-        table.insert(commands, match)
-    end
-
-    for _, command in ipairs(commands) do
-        local tokens = {}
-        for item in command:gmatch("([^ ]+)") do
-            table.insert(tokens, item)
-        end
-
-        if tokens[1] then
-            print()
-            func = (func or parse_input)(tokens)
-        end
+    local processed = parse_command(input)
+    if processed ~= "!!" then
+        shell_last = processed
     end
     
     print()
