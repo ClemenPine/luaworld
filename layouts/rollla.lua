@@ -1,0 +1,14 @@
+return {
+    name = "Rollla",
+    created = "2022 04 21",
+    format = "angle",
+
+    author = "Tanamr",
+    source = "https://github.com/samuelxyz/layouts#rollla",
+    
+    main = {
+        "y o u b . x k c l v",
+        "i a e n , m h s r t",
+        "' / p w z f d g j q"
+    }
+}

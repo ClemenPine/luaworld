@@ -1,0 +1,10 @@
+return {
+    name = "TypeHack",
+    format = "standard",
+    
+    main = {
+        "j g h p f q v o u ;",
+        "r s n t k y i a e l",
+        "z w m d b c , ' . x"
+    }
+}

@@ -1,0 +1,14 @@
+return {
+    name = "Gallium",
+    created = "2022 12 25",
+    format = "standard",
+
+    author = "GalileoBlues",
+    source = "https://github.com/GalileoBlues/Gallium",
+    
+    main = {
+        "b l d c v j y o u ,",
+        "n r t s g p h a e i",
+        "x q m w z k f ' ; ."
+    }
+}

@@ -1,0 +1,13 @@
+return {
+    name = "Ruthenium",
+    created = "2023 01 19",
+    format = "standard",
+
+    author = "GalileoBlues",
+    
+    main = {
+        "w d l f x q b u o y",
+        "r t h s g . n e a i",
+        "j k m c v z p ' , ;"
+    }
+}

@@ -1,0 +1,13 @@
+return {
+    name = "Wreathy",
+    created = "2022 05 12",
+    format = "standard",
+
+    author = "Eve",
+    
+    main = {
+        "q g d f v j l u o ,",
+        "n s t h y w r e a i",
+        "b c m p k z x / ' ."
+    }
+}

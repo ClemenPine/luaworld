@@ -1,7 +1,10 @@
 require "src/corpus"
+require "src/layout"
 
 local serpent = require "lib/serpent"
+
 local config = require "config"
+local layouts = load_layouts()
 local shell_last
 
 local function save_config(filename)
@@ -61,6 +64,32 @@ local function comma_value(amount)
     end
     return formatted
   end
+
+local function parse_layout(tokens)
+    if #tokens == 1 then
+        local total = 0
+        for _, _ in pairs(layouts) do
+            total = total + 1
+        end
+
+        print("Total layouts: " .. total)
+
+    elseif tokens[2] == "view" then
+        if tokens[3] then
+            local layout_name = tokens[3]
+
+            if layouts[layout_name] then
+                print_layout(layouts[layout_name])
+            else
+                print("Unknown layout '" .. layout_name .. "'")
+            end
+        else
+            print("Usage: layout view <layout_name>")
+        end
+    else
+        print("Unrecognized command '" .. tokens[2] .. "'.")
+    end
+end
 
 local function parse_corpus(tokens)
     if #tokens == 1 then
@@ -309,6 +338,8 @@ local function parse_input(tokens)
     elseif tokens[1] == "help" then
         print(
             "LuaWorld - Alpha 1.0.0\n" ..
+            "  layout\n" ..
+            "    view\n" ..
             "  corpus\n" ..
             "    list\n"..
             "    set\n"..
@@ -320,6 +351,9 @@ local function parse_input(tokens)
             "  help\n" ..
             "  quit"
         )
+
+    elseif tokens[1] == "layout" then
+        parse_layout(tokens)
 
     elseif tokens[1] == "corpus" then
         parse_corpus(tokens)
